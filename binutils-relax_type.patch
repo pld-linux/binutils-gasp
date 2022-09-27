@@ -1,0 +1,50 @@
+--- binutils-2.13.2.1/gas/tc.h.orig	2001-11-15 22:28:53.000000000 +0100
++++ binutils-2.13.2.1/gas/tc.h	2022-09-27 19:58:57.525827655 +0200
+@@ -27,22 +27,6 @@ extern const pseudo_typeS md_pseudo_tabl
+ /* JF moved this here from as.h under the theory that nobody except MACHINE.c
+    and write.c care about it anyway.  */
+ 
+-struct relax_type
+-{
+-  /* Forward reach. Signed number. > 0.  */
+-  long rlx_forward;
+-  /* Backward reach. Signed number. < 0.  */
+-  long rlx_backward;
+-
+-  /* Bytes length of this address.  */
+-  unsigned char rlx_length;
+-
+-  /* Next longer relax-state.  0 means there is no 'next' relax-state.  */
+-  relax_substateT rlx_more;
+-};
+-
+-typedef struct relax_type relax_typeS;
+-
+ extern const int md_reloc_size;	/* Size of a relocation record */
+ 
+ char *md_atof PARAMS ((int what_statement_type, char *literalP, int *sizeP));
+--- binutils-2.13.2.1/gas/as.h.orig	2002-07-14 03:14:19.000000000 +0200
++++ binutils-2.13.2.1/gas/as.h	2022-09-27 19:58:58.979153115 +0200
+@@ -397,6 +397,22 @@ typedef unsigned int relax_substateT;
+ /* Enough bits for address, but still an integer type.
+    Could be a problem, cross-assembling for 64-bit machines.  */
+ typedef addressT relax_addressT;
++
++struct relax_type
++{
++  /* Forward reach. Signed number. > 0.  */
++  long rlx_forward;
++  /* Backward reach. Signed number. < 0.  */
++  long rlx_backward;
++
++  /* Bytes length of this address.  */
++  unsigned char rlx_length;
++
++  /* Next longer relax-state.  0 means there is no 'next' relax-state.  */
++  relax_substateT rlx_more;
++};
++
++typedef struct relax_type relax_typeS;
+ 
+ /* main program "as.c" (command arguments etc) */
+ 
